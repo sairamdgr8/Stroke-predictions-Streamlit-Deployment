@@ -1,0 +1,6 @@
+seaborn==0.10.1
+streamlit==0.62.0
+numpy==1.18.1
+joblib==0.15.1
+pandas==1.2.3
+Pillow==8.1.2
