@@ -10,6 +10,12 @@ import streamlit as st
 import os
 import joblib
 from PIL import Image
+import plotly.express as px
+import plotly.graph_objects as go
+import plotly.offline as pyo
+from plotly.offline import init_notebook_mode
+init_notebook_mode(connected = True) 
+import matplotlib.pyplot as plt
 
 
 
@@ -149,8 +155,7 @@ def main():
         if st.checkbox("Show Summary Metrics"):
             st.write(data.describe())
             
-        if st.checkbox("Show Count plot for Smoking people"):
-            st.write()
+        
 
 
     if choices=="Data Visualization":
@@ -161,6 +166,16 @@ def main():
         st.text('')
         st.checkbox("Visualizing data with gender with type of smokers")
         st.write(sns.countplot(x='gender',hue='smoking_status',data=data1))
+        st.text('')
+        st.write(px.pie(data1, values='gender', names='smoking_status'))
+        y = np.array([data1[data1['smoking_status']==0].count().values[0],data1[data1['smoking_status']==1].count().values[0],data1[data1['smoking_status']==2].count().values[0],data1[data1['smoking_status']==3].count().values[0]])
+        mylabels = ["formerly smoke", "never smoked", "smokes", "Unknown"]
+        plt.pie(y, labels = mylabels)
+        st.write(plt.legend(title = "smokers types with male and female:"))
+         
+        
+        
+        
         
         
         
