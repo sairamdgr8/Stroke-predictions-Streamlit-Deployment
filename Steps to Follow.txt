@@ -1,7 +1,15 @@
+=============== crete requirements txt file
+1)open cmd
+2)pip install pipreqs ==== if installed skip  this step
+3)go particular folder and do  pipreqs ./
+4)it will create a file
+
+
+
 1. Create a repository on github and clone in your PC
 2. Navigate to that folder in the terminal
 3. Make a file named app.py
-4. Make a file named Procfile and paste this
+4. Make a file named Procfile(this file specifies you to run commands on heroku platform) and paste this
 
 	web: sh setup.sh && streamlit run app.py
 
