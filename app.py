@@ -16,6 +16,10 @@ import plotly.offline as pyo
 from plotly.offline import init_notebook_mode
 init_notebook_mode(connected = True) 
 import matplotlib.pyplot as plt
+import altair as alt
+import plotly.figure_factory as ff
+from plotly.subplots import make_subplots
+
 
 
 
@@ -161,17 +165,130 @@ def main():
     if choices=="Data Visualization":
         st.title("Stroke Prediction Analysis")
         st.subheader("Build with Streamlit")
-        st.subheader("Visualizing data")
+        st.subheader("Visualizing data with respective Dataset")
+        # with object values 
         data1=load_data('healthcare-dataset-stroke-data.csv')
-        st.text('')
-        st.checkbox("Visualizing data with gender with type of smokers")
-        st.write(sns.countplot(x='gender',hue='smoking_status',data=data1))
-        st.text('')
-        st.write(px.pie(data1, values='gender', names='smoking_status'))
-        y = np.array([data1[data1['smoking_status']==0].count().values[0],data1[data1['smoking_status']==1].count().values[0],data1[data1['smoking_status']==2].count().values[0],data1[data1['smoking_status']==3].count().values[0]])
-        mylabels = ["formerly smoke", "never smoked", "smokes", "Unknown"]
-        plt.pie(y, labels = mylabels)
-        st.write(plt.legend(title = "smokers types with male and female:"))
+        # without object values
+        #data_conv=load_data('converted dataframe.csv')
+        st.text('Visualizing data with All genders with type of smokers')
+        #st.checkbox("Visualizing data with gender with type of smokers")
+        #st.write(sns.countplot(x='gender',hue='smoking_status',data=data1))
+        #st.text('')
+        #st.write(px.pie(data1, values='gender', names='smoking_status'))
+        
+        
+        #Making the Simple Bar Chart
+        #### people who smokes
+        #smoking_status_label={'formerly smoked': 0, 'never smoked': 1, 'smokes':2, 'Unknown':3}
+        smoking_data = pd.DataFrame({'total population who smokes' : ["formerly smoke", "never smoked", "smokes", "Unknown"],
+                                     'both male and female': np.array([data1[data1['smoking_status']=='formerly smoked'].count().values[0],data1[data1['smoking_status']=='never smoked'].count().values[0],data1[data1['smoking_status']=='smokes'].count().values[0],data1[data1['smoking_status']=='Unknown'].count().values[0]])
+                                     })
+        
+        st.write(alt.Chart(smoking_data).mark_bar().encode(
+            # Mapping the Website column to x-axis
+            y='total population who smokes',
+            # Mapping the Score column to y-axis
+            x='both male and female'))
+        
+        ################################
+        
+        st.text('Visualizing data with BMI levels with Male')
+        filter_male=data1['gender']=='Male'
+        wrt_male=data1.where(filter_male)
+        st.bar_chart(wrt_male['bmi'])
+        
+        #############################
+        
+        
+        
+        #Making the line Chart wrt male
+        ## male bmi levels
+        
+        #wrt_male_bmi=wrt_male[['bmi']]
+        wrt_male_data=pd.DataFrame(wrt_male['bmi'],columns=['bmi with males'])
+        st.line_chart(wrt_male_data)
+        
+        
+        #Making the line Chart wrt male
+        ## male bmi levels
+        #not working
+        
+        #filter_male=data_conv['gender']==0
+        #data_conv.where(filter_male, inplace = True)
+        #hist_data_male = [data_conv['bmi'],data_conv['avg_glucose_level']]
+        #group_labels_male = ['bmi', 'glucose']
+        #fig_male = ff.create_distplot(hist_data_male, group_labels_male, bin_size=[10, 25])
+        #st.plotly_chart(fig_male, use_container_width=True)
+        
+        
+        st.subheader('Visualizing data with BMI levels with Male')
+        #Making the plot Chart wrt male
+        ## male bmi levels     
+        data_conv=pd.read_csv('converted dataframe.csv')
+        filter_male=data_conv['gender']==0
+        wrt_male=data_conv.where(filter_male)
+        arr = wrt_male['bmi']
+        fig, ax = plt.subplots()
+        ax.hist(arr, bins=20)
+        plt.xlabel('BMI Levels')
+        plt.ylabel('with respective males')
+        st.pyplot(fig)
+        
+        #data_conv=pd.read_csv('converted dataframe.csv')
+       #filter_male=data_conv['gender']==0
+        
+        arr = wrt_male['avg_glucose_level']
+        fig, ax = plt.subplots()
+        ax.hist(arr, bins=20)
+        plt.xlabel('Avg_Glucose_Levels')
+        plt.ylabel('with respective males')
+        st.pyplot(fig)
+        
+        
+        filter_female=data_conv['gender']==1
+        wrt_female=data_conv.where(filter_female)
+        arr = wrt_female['bmi']
+        fig, ax = plt.subplots()
+        ax.hist(arr, bins=20)
+        plt.xlabel('BMI Levels')
+        plt.ylabel('with respective females')
+        st.pyplot(fig)
+        
+        
+        arr = wrt_female['avg_glucose_level']
+        fig, ax = plt.subplots()
+        ax.hist(arr, bins=20)
+        plt.xlabel('Avg_Glucose_Levels')
+        plt.ylabel('with respective females')
+        st.pyplot(fig)
+        
+        
+        fig = px.pie(data_conv, values='gender', names='smoking_status',title='Total persons consumption smoking category')
+        st.plotly_chart(fig) 
+        
+        
+#        fig = go.Figure(data=[
+#        go.Bar(name='Male', x=data1[['gender']=='Male'], y=np.array([data1[data1['smoking_status']==0].count().values[0],data1[data1['smoking_status']==1].count().values[0],data1[data1['smoking_status']==2].count().values[0],data1[data1['smoking_status']==3].count().values[0]])),
+#        go.Bar(name='Female', x=data1[['gender']=='Female'], y=np.array([data1[data1['smoking_status']==0].count().values[0],data1[data1['smoking_status']==1].count().values[0],data1[data1['smoking_status']==2].count().values[0],data1[data1['smoking_status']==3].count().values[0]])),
+#        go.Bar(name='Other', x=data1[['gender']=='Other'], y=np.array([data1[data1['smoking_status']==0].count().values[0],data1[data1['smoking_status']==1].count().values[0],data1[data1['smoking_status']==2].count().values[0],data1[data1['smoking_status']==3].count().values[0]]))
+#        st.plotly_chart(fig)
+        
+        
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+     
+        
+        
+        
+            
          
         
         
@@ -258,9 +375,20 @@ def main():
         st.image(image, caption='Developed by Sai')
         st.text('')
         st.subheader('Connect  me... ')
-        st.subheader('https://www.linkedin.com/in/sairam-p-l/')
-        st.subheader('https://medium.com/@sairamdgr8')
-        st.subheader('https://www.facebook.com/bunnydgr8')
+        #st.subheader('https://www.linkedin.com/in/sairam-p-l/')
+        #st.subheader('https://medium.com/@sairamdgr8')
+        #st.subheader('https://www.facebook.com/bunnydgr8')
+        """
+        [![Linkledn Follow](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sairam-p-l/) https://www.linkedin.com/in/sairam-p-l/
+        
+        [![medium Follow](https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@sairamdgr8)  https://medium.com/@sairamdgr8 
+        
+        [![facebook Follow](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/bunnydgr8) https://www.facebook.com/bunnydgr8
+        
+        ![Gmail Follow](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white) sairamdgr8@gmail.com
+   
+        """
+        
         
         
     #if choices=='Testing':

@@ -1,3 +1,13 @@
+
+if deployment done on stream lit simple pretty and fast
+
+https://share.streamlit.io/
+
+these below steps for heroku deployment
+
+
+
+
 =============== crete requirements txt file
 1)open cmd
 2)pip install pipreqs ==== if installed skip  this step
@@ -33,3 +43,69 @@ enableCORS = false\n\
    git add .
    git commit -m "Some message"
    git push heroku master
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   =======================refrences
+   
+   https://github.com/epogrebnyak/ssg-dataset/blob/main/streamlit_app.py
+   
+   https://share.streamlit.io/epogrebnyak/ssg/main
+   
+   
+   
+   ==================
+   
+   devloper page :
+   
+   create social media tages using  https://shields.io/
+   
+   https://shields.io/category/social  >>> create your own label
+   
+   create own tages
+   
+   https://img.shields.io/badge/{FIRST}-{SECONDARY}-{HEX-COLOR}?style=for-the-badge&logo={ICON}&logoColor=white
+   
+   ex:- [![Linkledn Follow](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/sairam-p-l/)
+   
+         [![medium Follow](https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@sairamdgr8)
+		 
+         [![facebook Follow](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/bunnydgr8)
+
+[![Gmail Follow](https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white)](sairamdgr8@gmail.com)		 
+    
+   
+  <<<<<<<< github link to find social media links https://github.com/alexandresanlim/Badges4-README.md-Profile >>>>>>>>>>>>
+   
+   linkledn badge :--  https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+   
+   github :-  https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white
+   
+   facebook :-- https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white
+   
+   medium:- https://img.shields.io/badge/Medium-12100E?style=for-the-badge&logo=medium&logoColor=white
+   
+   youtube :- https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white
+   
+   gmail:-  https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
+   
+   
+   <<<<<<<<                    check out icons here ---------------------   https://simpleicons.org/   >
+   
+   
+   ========== visualization library altair
+   
+   https://github.com/altair-viz/altair_notebooks/tree/master/notebooks
+   
+   https://towardsdatascience.com/data-visualization-using-streamlit-151f4c85c79a
+   
+   
+   https://analyticsindiamag.com/building-a-covid-19-dashboard-using-streamlit/ ------------------ need to check
+   
